@@ -1,7 +1,6 @@
 'use strict'
 
 const check = (str, mainStr) => {
-    if(mainStr.includes(str)) return true
-    return false
+    return mainStr.includes(str)
 }
-console.log(check("qwer", "nqwertyu"))
+console.log(check("qwer1", "nqwertyu"))

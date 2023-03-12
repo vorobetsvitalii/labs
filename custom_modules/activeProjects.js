@@ -8,34 +8,30 @@ class ActiveProjects {
     }
 
 }
-const addActiveProject = (project, performer, start, end) => {
+const createActiveProject = (project, performer, start, end) => {
     let activeProject = new ActiveProjects(project, performer, start, end)
+    return activeProject
+}
+const addActiveProject = (activeProject) => {
     activeProjects.push(activeProject)
 }
 const changeActiveProject = (code, newEnd) => {
-    for (let i = 0; i < activeProjects.length; i++) {
-        if (activeProjects[i].code === code) {
+    let index = customers.findIndex(x => x.code === code);
             if (newEnd !== undefined) {
-                activeProjects[i].end = newEnd
+                activeProjects[index].end = newEnd
             }
             return
-        }
-    }
 }
 const deleteActiveProject = (code) => {
-    for (let i = 0; i < activeProjects.length; i++) {
-        if (activeProjects[i].code === code){
-            activeProjects.splice(i, 1)
+    let index = customers.findIndex(x => x.code === code);
+            activeProjects.splice(index, 1)
             return
-        }
-    }
 }
 
 const findActiveProject = (code) => {
-    for (let i = 0; i < activeProjects.length; i++) {
-        if (activeProjects[i].code === code) return activeProjects[i]
-    }
-    return -1
+    let index = customers.findIndex(x => x.code === code);
+        if (index === -1) return -1
+        else return activeProjects[index]
 }
 
-export default { activeProjects, addActiveProject, changeActiveProject, deleteActiveProject, findActiveProject }
+export default { activeProjects, addActiveProject, changeActiveProject, deleteActiveProject, findActiveProject, createActiveProject }

@@ -8,37 +8,31 @@ class Project {
     }
 
 }
-const addProject = (name, code, description, customer) => {
+const CreateProject = (name, code, description, customer) => {
     let project = new Project(name, code, description, customer)
     code.key++
+    return project
+}
+const addProject = (project) => {
     projects.push(project)
 }
 const changeProject = (code, newName, newDescription, newCustomer) => {
-    for (let i = 0; i < projects.length; i++) {
-        if (projects[i].code === code) {
-            if (newName !== undefined) {
-                projects[i].name = newName
-            }
-            if (newDescription !== undefined) {
-                projects[i].description = newDescription
-            }
-            if (newCustomer !== undefined) {
-                projects[i].customer = newCustomer
-            }
-            return 0
-        }
+    let index = projects.findIndex(x => x.code === code);
+    if (newName !== undefined) {
+        projects[index].name = newName
+    }
+    if (newDescription !== undefined) {
+        projects[index].description = newDescription
+    }
+    if (newCustomer !== undefined) {
+        projects[index].customer = newCustomer
     }
 }
 const deleteProject = (code) => {
-    for (let i = 0; i < projects.length; i++) {
-        if (projects[i].code === code){
-            projects.splice(i, 1)
-            return
-        }
-    }
+    let index = projects.findIndex(x => x.code === code);
+    projects.splice(index, 1)
 }
 
-
-export default { projects, addProject, changeProject, deleteProject }
+    export default { projects, addProject, changeProject, deleteProject, CreateProject }
 
 

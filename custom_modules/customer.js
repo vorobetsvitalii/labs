@@ -5,42 +5,41 @@ class Customer {
         this.budget = budget;
         this.code = code.key
     }
-
 }
-const addCustomer = (name, budget, code) => {
+const createCustomer = (name, budget, code) => {
     let customer = new Customer(name, budget, code)
     code.key++
+    return customer
+}
+const addCustomer = (customer) => {
     customers.push(customer)
 }
 const changeCustomer = (code, newName, newBudget) => {
-    for (let i = 0; i < customers.length; i++) {
-        if (customers[i].code === code) {
+    let index = customers.findIndex(x => x.code === code);
             if (newName !== undefined) {
-                customers[i].name = newName
+                customers[index].name = newName
             }
             if (newBudget !== undefined) {
-                customers[i].budget = newBudget
+                customers[index].budget = newBudget
             }
             return 0
-        }
     }
-}
 const deleteCustomer = (code) => {
-    for (let i = 0; i < customers.length; i++) {
-        if (customers[i].code === code){
-            customers.splice(i, 1)
-            return
-        }
+    let index = customers.findIndex(x => x.code === code);
+    if(index === -1){
+        return -1
+    }
+    else {
+        customers.splice(index, 1)
     }
 }
 
 const findCustomer = (code) => {
-    for (let i = 0; i < customers.length; i++) {
-        if (customers[i].code === code) return customers[i]
-    }
-    return -1
+   let index = customers.findIndex(x => x.code === code);
+   if(index === -1) return -1
+   else return customers[index]
 }
 
-export default { customers, addCustomer, changeCustomer, deleteCustomer, findCustomer }
+export default { customers, addCustomer, changeCustomer, deleteCustomer, findCustomer, createCustomer }
 
 

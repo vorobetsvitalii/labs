@@ -8,37 +8,32 @@ class Performer {
     }
 
 }
-const addPerformer = (name, code, experience, workers) => {
+const createPerformer = (name, code, experience, workers) => {
     let performer = new Performer(name, code, experience, workers)
     code.key++
+    return performer
+}
+const addPerformer = (performer) => {
     performers.push(performer)
 }
 const changePerformer = (code, newName, newExperience, newWorkers) => {
-    for (let i = 0; i < performers.length; i++) {
-        if (performers[i].code === code) {
+    let index = performers.findIndex(x => x.code === code);
             if (newName !== undefined) {
-                performers[i].name = newName
+                performers[index].name = newName
             }
             if (newExperience !== undefined) {
-                performers[i].experience = newExperience
+                performers[index].experience = newExperience
             }
             if (newWorkers !== undefined) {
-                performers[i].workers = newWorkers
+                performers[index].workers = newWorkers
             }
-            return 
-        }
-    }
 }
 const deletePerformer = (code) => {
-    for (let i = 0; i < performers.length; i++) {
-        if (performers[i].code === code){
-            performers.splice(i, 1)
-            return
-        }
-    }
+    let index = performers.findIndex(x => x.code === code);
+            performers.splice(index, 1)
 }
 
 
-export default { performers, addPerformer, changePerformer, deletePerformer }
+export default { performers, addPerformer, changePerformer, deletePerformer, createPerformer }
 
 
